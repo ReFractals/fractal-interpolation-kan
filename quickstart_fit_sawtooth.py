@@ -1,8 +1,11 @@
 """
-Quickstart: Fit the Takagi sawtooth function (dimB = 1.5).
+Quickstart: Fit the Takagi-Landsberg function (dimB = 1.5).
 
-Demonstrates Hybrid FI-KAN vs. KAN on a fractal target.
-Expected result: FI-KAN achieves ~50x lower MSE than KAN.
+Demonstrates Hybrid FI-KAN vs. KAN on a genuine fractal target.
+The Takagi-Landsberg function uses w = 2^{-1/2}, giving dimB = 1.5
+exactly and Holder exponent 1/2.
+
+Expected result: FI-KAN achieves ~6x lower MSE than KAN.
 
 Usage:
     python quickstart_fit_sawtooth.py
@@ -27,9 +30,9 @@ print(f"Device: {device}")
 # --- Data ---
 n_train, n_test = 1000, 400
 x_train = torch.linspace(-0.95, 0.95, n_train, device=device).unsqueeze(-1)
-y_train = fractal_sawtooth(x_train.squeeze(-1), depth=8).unsqueeze(-1)
+y_train = fractal_sawtooth(x_train.squeeze(-1), depth=12).unsqueeze(-1)
 x_test = torch.linspace(-0.95, 0.95, n_test, device=device).unsqueeze(-1)
-y_test = fractal_sawtooth(x_test.squeeze(-1), depth=8).unsqueeze(-1)
+y_test = fractal_sawtooth(x_test.squeeze(-1), depth=12).unsqueeze(-1)
 
 # --- KAN baseline ---
 torch.manual_seed(42)
