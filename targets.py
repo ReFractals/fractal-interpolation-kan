@@ -26,8 +26,8 @@ def weierstrass(x, a=0.5, b=7.0, n_terms=30):
 
     W(x) = sum_{n=0}^{n_terms-1} a^n cos(b^n pi x)
 
-    Graph dimension: dimB = 2 - log(a)/log(b).
-      a=0.5, b=7 -> dimB ~ 1.356
+    Graph dimension: dimB = 2 + log(a)/log(b).
+      a=0.5, b=7 -> dimB ~ 1.644
       a=0.7, b=3 -> dimB ~ 1.675
     """
     r = torch.zeros_like(x)
@@ -36,15 +36,23 @@ def weierstrass(x, a=0.5, b=7.0, n_terms=30):
     return r
 
 
-def fractal_sawtooth(x, depth=8):
+def fractal_sawtooth(x, depth=12):
     """
-    Takagi/Blancmange sawtooth variant.
-    Graph dimension: dimB = 1.5 exactly.
+    Takagi-Landsberg function with w = 2^{-1/2}.
+
+    T_w(x) = sum_{n=0}^{depth-1} w^n phi(2^n x)
+
+    where phi(x) = dist(x, Z) is the tent map and w = 2^{-1/2}.
+    Graph dimension: dimB = 2 + log_2(w) = 1.5 exactly.
+    Holder exponent: 1/2.
+
+    Reference: Lagarias (2012), "The Takagi function: a survey".
     """
+    w = 2.0 ** (-0.5)  # 1/sqrt(2)
     r = torch.zeros_like(x)
     for n in range(depth):
         s = (2.0 ** n) * x
-        r = r + (2.0 ** (-n)) * (s - s.round()).abs()
+        r = r + (w ** n) * (s - s.round()).abs()
     return r
 
 
