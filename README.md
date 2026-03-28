@@ -28,7 +28,7 @@ Two variants are provided:
 - **Hybrid FI-KAN** (Navascues framework): retains the B-spline path and adds a learnable
   fractal correction, implementing the alpha-fractal decomposition f_b^alpha = b + h.
 
-The method is particularly suited for function approximation targets with non-trivial
+The architecture is particularly suited for function approximation targets with non-trivial
 Holder regularity, fractal self-similarity, or structured roughness inherited from PDE
 operators (corner singularities, rough coefficients, stochastic forcing).
 
