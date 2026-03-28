@@ -81,15 +81,20 @@ Baselines include efficient-KAN (Blealtan, MIT License) and parameter-matched ML
 
 | Target | KAN MSE | Hybrid FI-KAN MSE | Improvement |
 |--------|---------|-------------------|-------------|
-| Sawtooth (dim_B = 1.5) | 2.04e-3 | 3.9e-5 | **52x** |
+| Takagi-Landsberg sawtooth (dim_B = 1.5) | 1.14e-2 | 1.81e-3 | **6.3x** |
 | Rough-coeff diffusion (H=0.3) | 1.19e-3 | 1.50e-5 | **79x** |
 | L-shaped corner singularity | 2.89e-3 | 8.35e-4 | **3.5x** |
 | Holder alpha=1.5 | 1.58e-3 | 4.8e-5 | **33x** |
-| Continual learning | 0.120 | 0.038 | **3.2x** |
+| Noise robustness (sawtooth, clean SNR) | 1.14e-2 | 1.87e-3 | **6.1x** |
 
 On smooth targets (polynomial, exp sin), Hybrid FI-KAN remains competitive or superior
-(up to 235x improvement on polynomial). Pure FI-KAN underperforms on smooth targets by
+(up to 220x improvement on polynomial). Pure FI-KAN underperforms on smooth targets by
 design, confirming the regularity-matching hypothesis.
+
+The strongest results are on non-smooth PDE solutions with structured roughness:
+**65-79x** improvement over KAN on rough-coefficient diffusion equations computed via
+scikit-fem, where the PDE operator transforms unstructured fBm coefficient roughness
+into structured, deterministic solution roughness that FI-KAN captures effectively.
 
 ---
 
@@ -107,7 +112,7 @@ pip install scikit-fem fbm scipy
 
 ## Quickstart
 
-Fit the Takagi sawtooth function (dim_B = 1.5):
+Fit the Takagi-Landsberg function (dim_B = 1.5, w = 2^{-1/2}):
 
 ```bash
 python quickstart_fit_sawtooth.py
@@ -122,8 +127,8 @@ python quickstart_fit_sawtooth.py
   regularizer, and fractal energy ratio diagnostic
 - `models.py`: `PureFIKAN`, `HybridFIKAN` (multi-layer network wrappers)
 - `baselines.py`: efficient-KAN (Blealtan, MIT), MLP with parameter matching
-- `targets.py`: Weierstrass, Takagi sawtooth, Holder family, Ackley 2D,
-  multiscale, chirp, and smooth benchmarks
+- `targets.py`: Weierstrass, Takagi-Landsberg (w = 2^{-1/2}, dim_B = 1.5),
+  Holder family, Ackley 2D, multiscale, chirp, and smooth benchmarks
 - `training.py`: multi-seed training loop with fractal dimension tracking
 - `benchmarks.py`: PDE data generators (L-shaped domain FEM, rough-coefficient
   diffusion FEM, stochastic heat equation, fractal terrain, fBm paths,
@@ -166,7 +171,7 @@ for i, rho in enumerate(model.fractal_energy_ratios()):
 
 ## Citation
 
-Will be updated soon.
+Will be updated soon
 
 ## License
 
