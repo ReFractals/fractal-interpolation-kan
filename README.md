@@ -1,7 +1,7 @@
 # FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks
 
 <p align="center">
-  <img src="figures/fikan_overview.png" alt="MLPs vs. KANs vs. FI-KANs" width="100%"/>
+  <img src="fikan_overview.png" alt="MLPs vs. KANs vs. FI-KANs" width="100%"/>
 </p>
 
 <p align="center">
