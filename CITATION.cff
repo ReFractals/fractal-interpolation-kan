@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "FI-KAN: Fractal Interpolation Kolmogorov-Arnold Networks"
+message: "If you use this software, please cite the paper."
+type: software
+authors:
+  - given-names: Gnankan Landry Regis
+    family-names: N'guessan
+    email: rnguessan@aimsric.org
+    affiliation: >-
+      Axiom Research Group;
+      Dept. of Applied Mathematics and Computational Science, NM-AIST, Arusha, Tanzania;
+      AIMS Research and Innovation Centre, Kigali, Rwanda
+license: MIT
+repository-code: https://github.com/ReFractals/fractal-interpolation-kan
+keywords:
+  - Kolmogorov-Arnold Networks
+  - fractal interpolation
+  - iterated function systems
+  - Holder regularity
+  - function approximation
+  - neural architecture design
